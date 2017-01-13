@@ -1,6 +1,6 @@
 # ParticleMovementSimulator
 
-A very flexible Simulator where you can enter your own formulas to experiment.
+A very flexible simulator for the movement of particles where you can enter your own formulas to experiment.
 
 ## Features
 
@@ -33,6 +33,15 @@ A very flexible Simulator where you can enter your own formulas to experiment.
 - supports logging to a file
 - supports gnuplot do display the moving path of the particles graphically
 - runs as thread in background, so while simulating you can tweak the formulas for your next simulation
+
+### Examples
+
+- comes with lots of simple examples, simply 'Load Settings' from the examples/ subdirectory
+
+### Other
+
+- supports storing and loading settings including all formulas
+- each simulation run automatically stores the according settings to disc, so every simulation can be reproduced later (except the values of random particle initialisation, but that's on purpose ;)
 
 ## Requirements
 
