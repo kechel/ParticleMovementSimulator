@@ -1,0 +1,136 @@
+\documentclass[12pt,a4paper,twocolumn]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[Lenny]{fncychap}
+\pagestyle{headings}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{rotating}
+\usepackage[colorlinks=false]{hyperref}
+\sloppy %besseres Trennungsverhalten 
+\begin{document}
+\pagenumbering{roman}
+%
+%
+\begin{titlepage}
+\begin{center}
+\vspace{1.5cm}
+
+\Large \textsc{Unifying Lorenz force and Magnetism}
+
+\vspace{6mm}
+
+	\normalsize 
+  Dipl. Inf. Jan Kechel, Dipl. Ing. Ottmar Kechel\\
+	\vspace{6mm}
+	18. September 2015\\
+	\vspace{6mm}
+    http://theory.kechel.de
+\end{center}
+
+\vspace{1.5cm}
+\tableofcontents
+\end{titlepage}
+
+\pagenumbering{arabic}
+\section{Introduction}
+Both, Lorenz force and Magnetism, describe forces on charged particles. Yet, until now, both had been understood as seperate, distinct phenomena.
+
+This article tries to unify both effects with only a slightly redefined Lorentz force.
+
+\section{Lorenz force and Magnetic force as defined before today}
+The Lorenz force was defined as $$\vec{F}=q[\vec{E}+\vec{v} \times \vec{B})]$$
+
+Magnetic force was defined as $$\vec{F}=q(\vec{v} \times \vec{B})$$
+
+\section{Forces in conductors with a current}
+
+Yet unexplained, or believed to be somehow explainable with relativity, is the asymmetric behavior of the force between two conductors:
+\begin{itemize}
+  \item Conductors with currents in the same direction are known to attract each other
+  \item Conductors with currents in opposing directions are known to push each other
+\end{itemize}
+
+\section{New definition of the Lorenz force}
+The force based upon the electric field remains unchanged $$\vec{F}_{electric}=q\vec{E}$$, but the force based upon the magnetic field is redefined to be based solely on the velocity difference $\Delta v$ and distance $d$ between two charged particles: $$\vec{F}_{magnetic}=q_1 q_2 \vec{\Delta v^2} / d^2$$
+
+Calculations show that this always yields the very same result as the definition before, and thus can be seen equal. Nontheless this new definition explains a lot more things that yet had been explained differently.
+
+\section{New explanation for forces between conductors with a current}
+In conductors with a current, there are not only moving electrons, but also fixed protons with a positive charge.
+
+As now electrons are moving in one conductor, they are not only moving in relation to other electrons, but also in relation to other protons. Depending on the direction of the moving electrons, the difference in speed between electrons in both conductors can be greater or lower than the difference between electrons in both conductors and all the protons. As the new Lorentz force formula is based upon $\Delta v$ the force between the electrons might be greater or lower than the force between the electrons and protons.
+
+In conductors with electrons going in the same direction $\Delta v_{e<->e}$ is lower than $\Delta v_{e<->p}$. So the force between electrons and protons is stronger, which results in a negative Force: The conductors attract each other.
+
+In conductors with electrons going in opposing direction $\Delta v_{e<->e}$ is higher than $\Delta v_{e<->p}$. So the force between electrons and electrons is stronger, which results in a positive Force: The conductors push each other away.
+
+\section{Eliminating magnetism}
+Based upon this new formula, also magnets can be explained: In magnets more electrons rotate around the atomic nucleus in the same direction as in all other directions. So there is a small (depending on the strengh of the magnet) difference in which direction electrons are moving in relation to their spatial position. The most strong magnet imaginable would have all electrons rotating around their nucleuses in the very same plane in the very same direction.
+
+\subsection{Explaining magnets force on charged particles}
+S = Southpole, N = Northpole, x-axis indicating the axis around which more electrons rotate then around other axes:
+
+\begin{verbatim}
+y    z
+|   /           SSSSSNNNNN
+|  /   e_1    SSSSSNNNNN  e_2
+| /         SSSSSNNNNN
+|-------------------------> x
+\end{verbatim}
+
+Electrons within the magnet rotate around the x axis, staying (more or less) in the y-z-plane. The x-axis as rotation-axes is obvious due to the symmetry of a magnet, which changes its magnetic field if rotated around z or y.
+
+A charged particle $e_1$ or $e_2$, staying near either of the two poles moves in relation to the electrons within the magnet, but not in relation to the protons in the magnet, which might lead to the wrong assumption that charged particles without velocity would be pushed or attracted by magnetic fields. This is not the case, as the force on the electron during a rotation is directed also around all directions in the y-z-plane. This, viewed together with lots of circulating electrons, which do rotate in the same y-z-plane, but which have distributed positions along their circular path, cancel each other out.
+
+A charged particle which is moving in x direction also does not recive any resulting force, as this does not create any asymmetry.
+
+Now, when the charged particle moves in the y-z-plane, thats a different case, as (1) the velocity difference to the protons now applies, as well as the velocity difference to the electrons changes depending on their position around their circular path, and thus the force calculated for position a is lower than the force calculated for position b, resulting in a overall force, which is well known and described as the classical Lorentz force.
+
+\subsection{Explaining magnets force on other magnets}
+\begin{verbatim}
+y    z
+|   /    SSSSSNNNNN     SSSSSNNNNN
+|  /   SSSSSNNNNN     SSSSSNNNNN
+| /  SSSSSNNNNN     SSSSSNNNNN
+|--------------------------------> x
+\end{verbatim}
+
+Two magnets, where different poles are nearer to each other, have the electrons closest to each other rotating in the very same directions. So the difference in speed between the electrons elminiates, leaving only the speed of the electrons in relation to the protons: The different ends of the magnets attract each other.
+
+\begin{verbatim}
+y    z
+|   /    SSSSSNNNNN     NNNNNSSSSS
+|  /   SSSSSNNNNN     NNNNNSSSSS
+| /  SSSSSNNNNN     NNNNNSSSSS
+|--------------------------------> x
+\end{verbatim}
+
+Two magnets, where same poles are nearer to each other, have the electrons closest to each other rotating in the opposing directions. So the difference in speed between the electrons doubles, while the speed between the electrons and protons remains unchainged: The different ends of the magnets push each other away.
+
+It has to be noted, that there is no difference in the axis or preferred rotation-direction on south or north pole, thus excluding the possiblity of monopoles. Monopoles do not exist if this explanation is correct.
+
+\section{New Lorentz formula}
+The Lorenz force can be defined between 2 particles as $$\vec{F}=q\vec{E} + q_1 q_2 \vec{\Delta v^2} / d^2$$
+
+Accordingly the Lorentz force on one particle $q_1$ can be defined as resulting force of interaction with all other relatively moved charged particles $q_2 .. q_n$ as 
+
+$$\vec{F}=q_1\vec{E} + \sum_{n=2}^{\infty}(q_1 q_n \vec{\Delta v_n^2} / d_n^2)$$
+
+
+\section{Conclusions}
+\begin{itemize}
+  \item Magnetic fields are only descriptions of forces that would apply to moving charged particles.
+  \item Magnetic fields do not exist 'really', but are only descriptions for possible forces whenever charged particles are moving at a specified position.
+  \item Magnetism does not exist, but only the Lorenz force as force determined by relative speeds and distance between charged particles exists.
+  \item Magnetic Monopoles do not exist.
+  \item The Lorentz force alone can explain all effects formerly described with magnetism. Please give it a try with your favorite effect! ;-) You can always reach out to us for discussion of specific effects at http://theory.kechel.de
+  \item Two charged particles in free space that are moving in relation to each other either attract or push each other: Same charges push, opposing charges attract. The sign of the speed-difference, whether approximating or departing, makes no difference, only the absolute value of the speed difference accounts
+\end{itemize}
+
+\section{Comments}
+We can not (yet) be sure that in magnets electrons really fly around one nucleus only, or maybe have wild strange pathways or 'superconducting currents'. The only thing that seems to be for sure is that the predominant pathways result in the same overall effect as the model where all electrons only fly around their own nucleus.
+
+\end{document}
+
+%

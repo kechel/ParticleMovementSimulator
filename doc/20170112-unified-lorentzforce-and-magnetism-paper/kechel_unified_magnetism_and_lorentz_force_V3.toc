@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Lorentz force and Magnetic force as defined before today}{1}{section.2}
+\contentsline {section}{\numberline {3}Forces in conductors with a current}{1}{section.3}
+\contentsline {section}{\numberline {4}New definition of the Lorentz force}{1}{section.4}
+\contentsline {section}{\numberline {5}New explanation for forces between conductors with a current}{1}{section.5}
+\contentsline {section}{\numberline {6}Eliminating magnetism}{2}{section.6}
+\contentsline {subsection}{\numberline {6.1}Explaining magnets force on charged particles}{2}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Explaining magnets force on other magnets}{3}{subsection.6.2}
+\contentsline {section}{\numberline {7}New Lorentz formula}{3}{section.7}
+\contentsline {section}{\numberline {8}Conclusions}{3}{section.8}
+\contentsline {section}{\numberline {9}Comments}{4}{section.9}
+\contentsline {section}{\numberline {10}Corrections}{5}{section.10}
+\contentsline {subsection}{\numberline {10.1}2017-01-12}{5}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}2017-01-13}{5}{subsection.10.2}

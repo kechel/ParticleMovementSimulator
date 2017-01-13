@@ -1,0 +1,29 @@
+
+
+statische:
+betrag: 1/r^2 mit richtung
+( q1 * q2 ) / (4 * pi * epsilon_0) * r0 (richtungsvektor einheitsvektor) / r^2 (abstand im quadrat)
+
+epsilon_0 = 8.854187 * 10^-12
+my_0 = 4 * pi * 10-7
+
+
+dynamische Kraft:
+
+Fx = ((10^-7 * q1 * q2 ) / r^2 ) * 
+
+[
+x: dvx * (dvx * drx + dvy * dry + dvz * drz) - drx * (dvx^2 + dvy^2 + dvz^2) 
+y: dvy
+z: dvz
+]
+
+
+dvx ist unersch. in geschw. in x-richtung
+r-komponenten sind einheitsvektoren
+
+dvx: vx2 - vx1
+-> fuer kraft tauf teil x2
+
+drx: px2 - px1
+

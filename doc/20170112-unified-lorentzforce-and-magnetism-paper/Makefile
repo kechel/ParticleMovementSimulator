@@ -1,0 +1,2 @@
+all:
+	pdflatex kechel_unified_magnetism_and_lorentz_force_V3.tex
