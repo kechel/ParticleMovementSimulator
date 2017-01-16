@@ -23,7 +23,7 @@
 	\normalsize 
   Dipl. Inf. Jan Kechel, Dipl. Ing. Ottmar Kechel\\
 	\vspace{6mm}
-	18. September 2015 with some small updates 13. January 2017\\
+	18. September 2015 with some small updates 16. January 2017\\
 	\vspace{6mm}
     http://theory.kechel.de
 \end{center}
@@ -114,11 +114,11 @@ It has to be noted, that there is no difference in the axis or preferred rotatio
 
 The total force $\vec{F_1}$ on a particle 1 which has a relative speed $\vec{\Delta v}$ and a distance $\vec{\Delta r}$ to particle 2 can be defined as 
 
-$$\vec{F_1}= \frac{q_1 q_2}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (\vec{\Delta v} \times \vec{\Delta r}))$$
+$$\vec{F_1}= \frac{q_1 q_2}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (-\vec{\Delta v} \times \vec{\Delta r}))$$
 
 Accordingly the total force on one particle $q_1$ can be defined as sum of the forces with all other relatively moved charged particles $q_2 .. q_n$ as 
 
-$$\vec{F_1}= \sum_{n=2}^{\infty} \frac{q_1 q_n}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (\vec{\Delta v} \times \vec{\Delta r}))$$
+$$\vec{F_1}= \sum_{n=2}^{\infty} \frac{q_1 q_n}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (-\vec{\Delta v} \times \vec{\Delta r}))$$
 
 where
 
@@ -152,6 +152,17 @@ We can not (yet) be sure that in magnets electrons really fly around one nucleus
 The new formulas in section 7 were clarified 
 \subsection{2017-01-13}
 The last two subitems in the Conclusions section where reformulated and corrected (The two charges cross.. / The vector of the momentary .. )
+\subsection{2017-01-16}
+Corrected pre sign in new Lorentz formula
+
+wrong was: 
+
+$$\vec{F_1}= \frac{q_1 q_2}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (\vec{\Delta v} \times \vec{\Delta r}))$$
+
+now corrected to: 
+
+$$\vec{F_1}= \frac{q_1 q_2}{4\pi\varepsilon_0 \vert \vec{\Delta r} \vert^3} ( \vec{\Delta r} + \frac{\vec{\Delta v}}{c^2} \times (-\vec{\Delta v} \times \vec{\Delta r}))$$
+
 \end{document}
 
 %

@@ -12,3 +12,4 @@
 \contentsline {section}{\numberline {10}Corrections}{5}{section.10}
 \contentsline {subsection}{\numberline {10.1}2017-01-12}{5}{subsection.10.1}
 \contentsline {subsection}{\numberline {10.2}2017-01-13}{5}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.3}2017-01-16}{5}{subsection.10.3}
