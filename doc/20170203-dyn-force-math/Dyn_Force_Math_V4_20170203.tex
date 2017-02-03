@@ -1,0 +1,282 @@
+\documentclass[10pt,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+\usepackage[a4paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{mathtools}
+
+\begin{document}
+
+\author{Ottmar K. Kechel}
+\date{Datum}
+
+
+{\large Force between moving Charges}\\\\
+Author: Ottmar Kechel        
+\\
+\\
+Version No.4 dated 3 Feb 2017\\\\
+Derivation of the new formula 
+\\\\
+The force on charges is given by few equations.
+The formulas are taken from 
+\\John David Jackson [JDJ]; Classical Electrodynamics; Third Edition.
+\\The F numbers refer to the Formula No. (F n.m) in that book.
+\\
+
+1. The Lorentz Force (Introduction F 1.3)
+
+
+\begin{equation}
+\textbf{F} = q(\textbf{E}+\textbf{v }\textbf{x}\textbf{ B})
+\end{equation}\\
+
+2. The Coulomb Formula gives the static force between two charges $q_1$ and $q_2$ 
+\\
+
+\begin{equation}
+\textbf{F} = \frac{1}{(4\pi \epsilon)} (q_1*q_2)\frac{\textbf{r}}{\vert\textbf{r}\vert^3}
+\end{equation}\\
+
+as  $c = ( \mu_0 * \epsilon_0)^{-1/2}$        according JDJ page 3 and $\mu_0=4\pi10^{-7}$ in SI units
+\\
+\\
+the expression $1/(4\pi\epsilon)$ can and will be replaced in the following by $c^2/10^7$\\
+\\
+so the Coulomb law has the following expression (Chapter 1  F 1.3)
+\begin{equation}
+\textbf{E} = \frac{ q_1c^2}{10^7}\frac{\textbf{x-x1}}{\vert\textbf{x-x1}\vert^3}
+\end{equation}\\
+
+3. The BIOT and Savart Formula (Chapter 5  F 5.5)
+\\(By the way the same formula appears in chapter 11.10 in the Gauss unit system describing the B field of a passing charge.)\\
+\\
+\begin{equation}
+\textbf{B} = kq \frac{\textbf{v} \times \textbf{x}}{\vert\textbf{x}\vert^3}
+\end{equation}
+\\
+The constant factor k is in SI  $[10^{-7}]$ with the units $[N/A^2]$ =  $[kg*m/C^2]$
+\\
+\\
+\\
+Here a warning is included in the book [1] consisting of three objections
+
+"... But this expression is time dependent and furthermore is valid only for charges whose velocities are small compared to that of light and whose accelerations can be neglected .  ..."
+\\
+\\
+a) The expression is time dependent, and leads furtheron to Non Linear Partial Differenetial Equations of First Order. These PDEs cannot be resolved easily without the help of intense numerical calculations. 
+But this should be no hinderance today to follow that path, as such numerical calculations can be done on nearly every computer today (in 2017).
+\\
+\\
+b) In our New Theory the speed of light is no limit for particles, so that this limitation is not valid in the New Theory. 
+\\
+\\
+c) For the acceleration the present interpretation is also not sufficient, as it is known, that the rotation of electrons in atoms around the kernel cannot be correctly interpreted by the present theory. The electrons are accelerated continuously and should emit electromagnetic waves. They do not ! So the present very simple rule, that accelerated charges create electromagnetic waves needs a refinement. 
+(We are confident that we find a sound explanation in the New Theory. An explanation is under work.)\\
+\\
+With the replacement as before the Biot Savart formula becomes
+\begin{equation}
+\textbf{B} = \frac{q}{10^7} \frac{\textbf{v} \times \textbf{x}}{\vert\textbf{x}\vert^3}
+\end{equation}\\
+\\
+\\
+The interpretation of (5) is:\\
+a charge q generates a \textbf{B} field at the observation point, when it has the velocity \textbf{v} and its location is described by the distance vector \textbf{x}.
+\\
+\\
+Now one can combine the Biot and Savart and Coulomb formula with the Lorentz force.
+
+\begin{equation}
+\textbf{F} = q(\textbf{E}+\textbf{v }\textbf{x}(\frac{1}{10^7} \frac{\textbf{v} \times \textbf{x}}{\vert\textbf{x}\vert^3}))
+\end{equation}\\
+For better reading \textbf{x} will be replaced by  \textbf{r} and the term for the static force included
+
+\begin{equation}
+\textbf{F} = \frac{{q_1}{q_2}}{{10^7}}( \frac{c^2\textbf{r}}{\vert\textbf{r}\vert^3}+\textbf{v }\textbf{x}( \frac{\textbf{v} \times  \textbf{r}}{\vert\textbf{r}\vert^3}))
+\end{equation}\\
+
+This is equal to
+
+\begin{equation}
+\textbf{F} = \frac{q_1q_2}{10^7\vert\textbf{r}\vert^3}  (c^2\textbf{r}+\textbf{v }\textbf{x }( {\textbf{v} \times  \textbf{r}}))
+\end{equation}\\
+or
+\begin{equation}
+\textbf{F} = \frac{q_1q_2c^2}{10^7\vert\textbf{r}\vert^3}  (\textbf{r}+\frac{1}{c^2}(\textbf{v }\times( {\textbf{v} \times  \textbf{r}}))
+\end{equation}\\
+or
+\begin{equation}
+\textbf{F} = \frac{q_1q_2c^2}{10^7\vert\textbf{r}\vert^3}  (\textbf{r}+(\frac{\textbf{v}}{c}\times( {\frac{\textbf{v}}{c}    \times {\textbf{r}}}))
+\end{equation}
+\\
+
+
+Now one can transform the two vector products according the mathematical identity
+
+
+
+\begin{equation}
+\textbf{a }\times (\textbf{ b } \times  \textbf{c })=\textbf{ b }(\textbf{a }\textbf{c }) - \textbf{c }(\textbf{a }\textbf{ b })
+\end{equation}\\
+and gets
+\begin{equation}
+\textbf{F} = \frac{q_1q_2}{10^7\vert\textbf{r}\vert^3}  (c^2\textbf{r}  +   \textbf{ v }(\textbf{v }\textbf{r }) - \textbf{r }(\textbf{v }\textbf{ v }))
+\end{equation}
+\\
+\\
+From the formulas (7) to (10) follows
+\\a) the force is always proportional to the product of the charges (for static and dynamic forces)
+\\b) the force decreases always with the square of the distance (for static and dynamic forces)
+\\c) there are always several components included, the first expression $c^2\textbf{r}$ in the brackets corresponds to the well known static force between the charges, the second expression represents the dynamic force, what usually is called the magnetic influence. This is velocity dependent. 
+\\d) the first cross product generates a force that is always perpendicular to the momentary speed. That is equal to the rule that a moving charge in a magnetic field does not gain any energy, it is only deflected perpendicular to its momentary velocity vector.
+\\
+\\
+From the formula (12) follows
+\\e) That the dynamic force is zero whenever the velocity \textbf{v } and radius vector \textbf{r } are parallel, and this can only be if they are on the same line to each other.
+\\
+\\
+With that it is shown, that the forces between two charges moving relative to each other can be calculated with formula (12). The result is identical to a calculation where at first the B field is determined then  the resulting force calculated.
+But this expression does not include anymore a B-field expression. The calculation of a B field is obsolete.
+It is replaced by the dynamical force between two charges.
+Also the use of the three finger rule to determin the resulting force direction is no longer needed. The resulting dynamical force is always in the plane given by the velocity vector and the distance vector. The direction is always the same as with the static force, two bodies with the same charge polarity repel each other (the static plus the dynamic force). If the charges have different polarities the particles attract each other more than only by the static force.
+This means that a B field is not existing, it is only a helpful description for many calculations, especially, when regarding the movement of a low mass single charged particle influenced by many other charges with higher mass, so that the backward interaction can be neglected.
+\\
+\\
+One can write now the whole formula using vectors considering two charges\\
+charge 0 and charge 1
+
+\begin{equation}
+\textbf{$\textbf{F}_1$}=\dfrac{c^2}{10^7}\dfrac{q_0q_1}{\vert\textbf{r}\vert^3}*
+\begin{Bmatrix}
+\begin{pmatrix}r_{1x}-r_{0x}\ \\ r_{1y}-r_{0y}\\r_{1z}-r_{0z}\end{pmatrix}+
+\begin{pmatrix}(r_{1x}-r_{0x})\dfrac{\textbf{v}^2}{c^2}\\ \\(r_{1y}-r_{0y})\dfrac{\textbf{v}^2}{c^2}\\ \\(r_{1z}-r_{0z})\dfrac{\textbf{v}^2}{c^2}\end{pmatrix}-
+\begin{pmatrix}(v_{1x}-v_{0x})\dfrac{\textbf{v}*\textbf{r}}{c^2}\\ \\(v_{1y}-v_{0y})\dfrac{\textbf{v}*\textbf{r}}{c^2}\\ \\(v_{1z}-v_{0z})\dfrac{\textbf{v}*\textbf{r}}{c^2}\end{pmatrix}
+\end{Bmatrix}
+\end{equation}\\
+with  \begin{equation}
+\textbf{v}^2=(v_{1x}-v_{0x})^2+(v_{1y}-v_{0y})^2+(v_{1z}-v_{0z})^2
+\end{equation}  
+\\and \begin{equation}
+\textbf{v*r}=(v_{1x}-v_{0x})*(r_{1x}-r_{0x})+(v_{1y}-v_{0y})*(r_{1y}-r_{0y})+(v_{1z}-z_{0z})*(r_{1z}-r_{0z})
+\end{equation}
+\\and   \begin{equation}
+\vert\textbf{r}\vert^3=((r_{1x}-r_{0x})^2+(r_{1y}-r_{0y})^2+(r_{1z}-r_{0z})^2 \ \ )^{3/2}
+\end{equation}
+\\
+\\
+If you select the coordinate system such that charge 0 is located at r=(0,0,0) with velocity v=(0,0,0)\\
+you get a somewhat simpler form for the equation giving the momentary force acting on \linebreak charge 1.
+\\
+\\
+\begin{equation}
+\textbf{$\textbf{F}_1$}=\frac{c^2}{10^7}\dfrac{q_0q_1}{\vert\textbf{r}\vert^3}*
+\begin{Bmatrix}
+\begin{pmatrix}r_{1x} \\ r_{1y}\\r_{1z}\end{pmatrix}+
+\begin{pmatrix}r_{1x}\dfrac{v_1^2}{c^2} \\	r_{1y}\dfrac{v_1^2}{c^2} \\r_{1z}\dfrac{v_1^2}{c^2}\end{pmatrix}-
+\begin{pmatrix}v_{1x}\dfrac{v_1*r_1}{c^2} \\	v_{1y}\dfrac{v_1*r_1}{c^2} \\v_{1z}\dfrac{v_1*r_1}{c^2}\end{pmatrix}
+\end{Bmatrix}
+\end{equation}
+
+
+Now lets look at some more details.
+As there is no absolute velocity, and no limit in the velocity, one can use a coordinate system where the charge q0 is at $r_0=(0,0,)$ with a velocity $v_0 = (0,0,0)$.
+Additionally the coordinate system will be chosen such that all elements are in the x-y plane, then no component is created in direction of the z-axis. The resulting forces are all in the x-y plane.
+\\
+\\
+The vector formula with q1 at 
+
+$r_{x1}$; $r_{y1}$; and  $v_{1} = v_{x1}$ ; $v_{y1}=v_{z1}=0$
+
+reduces to
+\\
+\\
+\begin{equation}
+\textbf{$\textbf{F}_1$}=\frac{c^2}{10^7}\dfrac{q_0q_1}{\vert\textbf{r}\vert^3}*
+\begin{Bmatrix}
+\begin{pmatrix}r_{1x} \\ r_{1y}\\0\end{pmatrix}+
+\begin{pmatrix}0 \\	r_{1y}\dfrac{v_{1x}^2}{c^2} \\0\end{pmatrix}
+\end{Bmatrix}
+\end{equation}
+\\
+\\
+\textbf{This is the momentary force on $q_1$.}
+\\
+\\And just for repetition:\
+\begin{equation}
+\frac{c^2}{10^7}=\frac{1}{4\pi\epsilon_0}
+\end{equation}
+\\
+\\
+\textbf{The force  $F_0$  on $q_0$ is the negative from $F_1$ acting on charge 0.}
+\\
+\\
+The force on $  q_0$ has the same magnitude but opposite direction.
+One can see that the first vector term is a central force between the two charges.
+The second term creates a moment (torque) on the two charges, and with that does not add kinetic energy to the charges. The dynamic forces are opposite in direction but no central forces, except in the case when $r_{1x}$ is also zero (0). That is the case if charge 1 is circling around charge 0 with constant radius. In such a case the dynamic force is also acting like a central force and simply increases the static force.
+\\
+\\
+With that the third Axiom from Newton has to be modified for electric charges. Each force creates immediately the same counterforce in exactly the same opposite direction. This is valid for all central forces, like static electric forces, and gravitational forces. This is as before, new is now:
+For charges there is a dynamic force that creates a rotational moment. The dynamic forces on the charges have the same amount, opposite direction, the moment arm is the distance of the two lines that are perpendicular to the velocty vectors This distance is zero (0), when the charges are circling around each other, or when a passing charged particle reaches its closest point to the other. 
+\\
+\\
+At the point of closest approach in the formula 18 for $r_x = 0$ the moment arm is zero (0). 
+This is always the case, if charge 2 is circling around charge 1. Then no moment is created, remaining is the dynamic force that adds to the central force of the static electric field.
+According to the previous formula the total force that acts against the radial rotation force is just double of the static force, when the relative speed is c.
+\\
+\\
+Different numeric simulations were done using this formula.        					
+\\
+\\
+A) Presently the most impressive is the comparison of electron beam deflection, where the beam passes through opposite charged fixed spheres.
+The result is, that the x-y path is basically identical with a calculation that uses the Lorentz-Transform from Special Relativity.
+It was found by numerical simulations that a maximum deviation between the two theories of 12,5\% appeared when the kinetic energies are in the range of their rest mass $m*c^2$. If you go to lower or higher kinetic energies, then the two path calcuculations are (nearly) identical. Of course the calculated needed time for an electron to run along a given path, due to the time dilation in SR, is different. The time in SR is longer according the Gamma factor, thus allowing the static electric force alone to bend the beam accordingly. This time dilation is not given in the new theory. The stronger bending (compared with the classical calculation considering only the static Coulomb force) is due to the dynamic force or one even could say due to the "magnetic" interaction of the charges.
+\\
+\\
+B) A further simulation calculation was done to expand the Bohr Atom Model with these dynamic forces.
+\\
+\\
+If you take formula (18) and let the coordinate system rotate with $q_1$, so that $r_{1x}$ is always zero you have the attracting force of charge $q_1$ to $q_0$. (assuming  $q_1$<0 ; $q_0$>0).
+Adding now the radial acceleration $v^2/r$ you come to an extended Atom-Model that additionally to the Bohr-Atom model not only considers the static force and radial acceleration with its resulting force but also the dynamic force. Replace $q_0$ by $n_p*(-q_e)$ i.e. the charge of a proton multiplied the number $(n_p)$ of protons in one atom kernel and $q_1$ by $q_e$ (the charge of one electron)
+leads to the following equation that must be zero (=0).
+\\
+\begin{equation}
+\textbf{$\textbf{F}_1$}=\frac{c^2}{10^7}\dfrac{q_e*n_p*(-q_e)}{r^3}*
+\begin{Bmatrix}
+\begin{pmatrix}0 \\ r\\0\end{pmatrix}+
+\begin{pmatrix}0 \\	\dfrac{v^2}{c^2} \\0\end{pmatrix}
+\end{Bmatrix} +
+m_e *
+\begin{pmatrix}0 \\	\dfrac{v^2}{r} \\0\end{pmatrix}
+=0
+\end{equation}
+\\($m_e$ is the mass of an electron; $q_e$ the charge of an electron)
+\\
+\\
+Taking now the quantization condition:
+\begin{equation}
+v = (n_q * \hbar)/(r*m_e)
+\end{equation}($n_q$ is the quantization number; $\hbar$  is the Planck constant over two pi)\\
+\\you have two equations with two unknown variables.
+Now one can calculate the radius and the velocity.
+\\
+For this purpose a simulation calculation was done for all atoms, but considered in a first step only one electron around the kernel. Also the internal electric moments of electrons and protons were not considered in this first approach. A comparison was made to the existing Bohr Model. Basically no major difference can be seen for atoms with few protons. For atoms with 50 or more protons, the difference between the Classical Bohr Model and the extended model (including the dynamic forces) show big differences (more than factor 2). These differences could not be verified, as in all tables of ionisation energies we looked at, we did not find experimental data for large atoms ($n_p$>50; $n_p$ is also often called Z) for their ionization energy for the first electron around the kernel, when all other electrons are stripped off.
+\\
+\\
+C) Another result from this extended Atom Model seems interesting. The above shown equations deliver not only one result, that is basically the slightly modified Bohr Model. For quantization numbers 1 to 10 the radius increases from about $4*10^{-11}$ m to about $6*10^{-9}$ m  similar to the Bohr model. In this new model there is a second solution for a Hydrogen atom. With increasing the energy of the circling electron around the kernel, there seems to be a lower limit for the radius. In the calculation this minimum radius turns out to be $(2,8180  +/-0,0001)*10^{-15}$ m for quantization numbers $n_q$ = 1...10.\\
+Is this minimum radius corresponding to the volume of pulsars with their high density ?  The order of magnitude seems to be equal. And by the way, how was the density of pulsars determined ?  By Quantum Theory ? EOS; Equation Of State ? Some further points to check.
+\\
+\\
+
+
+
+\begin{thebibliography}{100}
+\bibitem [1]{Jackson}   Classical Electrodynamics,  3rd Edition, John David Jackson
+\end{thebibliography}
+
+\end{document}
