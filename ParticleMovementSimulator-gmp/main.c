@@ -19,26 +19,12 @@
 */
 
 
-#include <stdio.h>
 #include <gmp.h>
+#include <stdio.h>
 #include "load_particle_pool_from_csv.h"
+#include "output_helpers.h"
 
-#define OUTPUT_PRECISION 5
 #define POOL_FILENAME "particle_pool.csv"
-
-void print_particle_values(Particle* p)
-{
-    gmp_printf(" x %.*Fe ", OUTPUT_PRECISION, *((*p).position_x));
-    gmp_printf(" y %.*Fe ", OUTPUT_PRECISION, *((*p).position_y));
-    gmp_printf(" z %.*Fe\n", OUTPUT_PRECISION, *((*p).position_z));
-
-    gmp_printf("vx %.*Fe ", OUTPUT_PRECISION, *((*p).velocity_x));
-    gmp_printf("vy %.*Fe ", OUTPUT_PRECISION, *((*p).velocity_y));
-    gmp_printf("vz %.*Fe\n", OUTPUT_PRECISION, *((*p).velocity_z));
-
-    gmp_printf(" m %.*Fe ", OUTPUT_PRECISION, *((*p).mass));
-    gmp_printf(" c %.*Fe\n", OUTPUT_PRECISION, *((*p).charge));
-}
  
 int main(int argc, char *argv[])
 {
@@ -52,15 +38,7 @@ int main(int argc, char *argv[])
   load_particle_pool_from_csv(POOL_FILENAME, &pool);
   printf("\nParsing Particle Pool %s done\n", POOL_FILENAME);
 
-  for( int particle_index = 0; particle_index <= pool.particles_initialized; particle_index++)
-  {
-    printf("\nParticle %d:\n", particle_index);
-
-    Particle* p = pool.particles[particle_index];
-
-    print_particle_values(p);
-
-  }
+  print_particle_pool_values(&pool);
 
   return 0;
 }

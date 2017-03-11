@@ -18,15 +18,16 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-#ifndef LOAD_PARTICLE_POOL_FROM_CSV_H
-#define LOAD_PARTICLE_POOL_FROM_CSV_H
+#ifndef OUTPUT_HELPERS_H
+#define OUTPUT_HELPERS_H
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <csv.h>
+#include <gmp.h>
 #include "pms_datatypes.h"
 
-int load_particle_pool_from_csv(char* filename, ParticlePool* pool);
+#define OUTPUT_PRECISION 5
+
+void print_particle_values(Particle* p);
+void print_particle_pool_values(ParticlePool* pool);
 
 #endif
