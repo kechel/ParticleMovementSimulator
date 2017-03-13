@@ -18,39 +18,25 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-#ifndef PMS_DATATYPES_H 
-#define PMS_DATATYPES_H
+#ifndef CONFIGURATION_HELPERS_H
+#define CONFIGURATION_HELPERS_H
 
+#include <libconfig.h>
 #include <gmp.h>
 
-#define MAX_PARTICLES 100
-
-typedef struct Particle
+typedef struct pms_config
 {
-  mpf_t* position_x;
-  mpf_t* position_y;
-  mpf_t* position_z;
+  const char* ConfigurationFilename;
+  const char* ParticlePoolFilename;
+  mpf_t StartTime;
+  mpf_t EndTime;
+  mpf_t StepSize;
+  int mpf_set_default_prec;
+  int SaveOnlyStartEndPoints;
+  int SaveOnlyStepNumberMultiplesOf;
+  int OutputPrecision;
+} pms_config;
 
-  mpf_t* velocity_x;
-  mpf_t* velocity_y;
-  mpf_t* velocity_z;
-
-  mpf_t* force_x;
-  mpf_t* force_y;
-  mpf_t* force_z;
-
-  mpf_t* mass;
-
-  mpf_t* charge;
-
-} Particle;
-
-typedef struct ParticlePool
-{
-  unsigned int current_particle_index;
-  unsigned int current_field_index;
-  unsigned int particles_initialized;
-  Particle* particles[MAX_PARTICLES];
-} ParticlePool;
-
+pms_config load_configuration(int argc, char *argv[]);
+void print_config_values(int precision, pms_config config);
 #endif

@@ -25,9 +25,4 @@
 #include <gmp.h>
 #include "pms_datatypes.h"
 
-#define OUTPUT_PRECISION 5
-
-void print_particle_values(Particle* p);
-void print_particle_pool_values(ParticlePool* pool);
-
 #endif

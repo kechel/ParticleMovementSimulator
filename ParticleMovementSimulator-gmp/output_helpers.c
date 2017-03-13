@@ -20,32 +20,4 @@
 
 #include "output_helpers.h"
 
-void print_particle_values(Particle* p)
-{
-    gmp_printf(" x %.*Fe ", OUTPUT_PRECISION, *((*p).position_x));
-    gmp_printf(" y %.*Fe ", OUTPUT_PRECISION, *((*p).position_y));
-    gmp_printf(" z %.*Fe\n", OUTPUT_PRECISION, *((*p).position_z));
 
-    gmp_printf("vx %.*Fe ", OUTPUT_PRECISION, *((*p).velocity_x));
-    gmp_printf("vy %.*Fe ", OUTPUT_PRECISION, *((*p).velocity_y));
-    gmp_printf("vz %.*Fe\n", OUTPUT_PRECISION, *((*p).velocity_z));
-
-    gmp_printf(" m %.*Fe ", OUTPUT_PRECISION, *((*p).mass));
-    gmp_printf(" c %.*Fe\n", OUTPUT_PRECISION, *((*p).charge));
-}
-
-void print_particle_pool_values(ParticlePool* pool)
-{
-  printf("\nDumping Particle Pool:\n");
-
-  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
-  {
-    printf("\nParticle %d:\n", particle_index);
-
-    Particle* p = (*pool).particles[particle_index];
-
-    print_particle_values(p);
-  }
-
-  printf("\nDumping Particle Pool done\n");
-}

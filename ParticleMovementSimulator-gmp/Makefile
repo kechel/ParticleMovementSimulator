@@ -20,7 +20,7 @@
 
 CC = gcc
 CC_FLAGS = -Wall -std=c11
-CC_LIBS = -lgmp -lm -lcsv
+CC_LIBS = -lgmp -lm -lcsv -lconfig
  
 EXEC = pms
 SOURCES = $(wildcard *.c)

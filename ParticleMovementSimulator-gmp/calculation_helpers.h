@@ -18,39 +18,17 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
-#ifndef PMS_DATATYPES_H 
-#define PMS_DATATYPES_H
+#ifndef CALCULATION_HELPERS_H
+#define CALCULATION_HELPERS_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <gmp.h>
+#include "pms_datatypes.h"
 
-#define MAX_PARTICLES 100
+#define SPEED_OF_LIGHT "299792458"
 
-typedef struct Particle
-{
-  mpf_t* position_x;
-  mpf_t* position_y;
-  mpf_t* position_z;
-
-  mpf_t* velocity_x;
-  mpf_t* velocity_y;
-  mpf_t* velocity_z;
-
-  mpf_t* force_x;
-  mpf_t* force_y;
-  mpf_t* force_z;
-
-  mpf_t* mass;
-
-  mpf_t* charge;
-
-} Particle;
-
-typedef struct ParticlePool
-{
-  unsigned int current_particle_index;
-  unsigned int current_field_index;
-  unsigned int particles_initialized;
-  Particle* particles[MAX_PARTICLES];
-} ParticlePool;
+void calculate_forces_on_each_particle(ParticlePool *pool);
+void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize);
 
 #endif

@@ -23,22 +23,50 @@
 #include <stdio.h>
 #include "load_particle_pool_from_csv.h"
 #include "output_helpers.h"
+#include "configuration_helpers.h"
+#include "calculation_helpers.h"
 
-#define POOL_FILENAME "particle_pool.csv"
- 
 int main(int argc, char *argv[])
 {
-  mpf_set_default_prec(1000); // set internal precision of GNU Multiple Precision Arithmetic Library 
+  pms_config config = load_configuration(argc, argv);
+  printf("--------------------------------------------------------------------------------\n");
+  print_config_values(config.OutputPrecision, config);
+  printf("--------------------------------------------------------------------------------\n");
+
+  mpf_set_default_prec(config.mpf_set_default_prec); 
 
   ParticlePool pool;
   pool.current_particle_index = 0;
   pool.current_field_index = 0;
 
-  printf("Parsing Particle Pool %s", POOL_FILENAME);
-  load_particle_pool_from_csv(POOL_FILENAME, &pool);
-  printf("\nParsing Particle Pool %s done\n", POOL_FILENAME);
+  load_particle_pool_from_csv(config.ParticlePoolFilename, &pool);
+  printf("--------------------------------------------------------------------------------\n");
+  print_particle_pool_values(config.OutputPrecision, &pool);
+  printf("--------------------------------------------------------------------------------\n");
 
-  print_particle_pool_values(&pool);
+  printf("Starting Simulation..\n");
+
+  unsigned long step_number = 0;
+
+  mpf_t current_time;
+  mpf_init_set(current_time, config.StartTime);
+
+  do
+  {
+    step_number += 1;
+    if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
+    {
+      printf("--------------------------------------------------------------------------------\n");
+      printf("Steps calculated: %lu\n", step_number);
+      print_particle_pool_values(config.OutputPrecision, &pool);
+    }
+
+    calculate_forces_on_each_particle(&pool); 
+    move_particles_to_next_position(&pool, config.StepSize);
+
+    mpf_add(current_time, current_time, config.StepSize);
+  } while( mpf_cmp(current_time, config.EndTime) <= 0);
+
 
   return 0;
 }

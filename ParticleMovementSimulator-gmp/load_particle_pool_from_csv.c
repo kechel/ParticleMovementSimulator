@@ -26,15 +26,28 @@
 void csv_line_finished(int delim __attribute__((unused)), void* p_pool) 
 {
   ParticlePool* pool = ((ParticlePool*)p_pool);
+  unsigned int particle_index = (*pool).current_particle_index;
 
-  if( (*pool).current_particle_index >= MAX_PARTICLES)
+  if( particle_index >= MAX_PARTICLES)
   {
     return;
   }
 
+  Particle** particles = (*pool).particles;
+  Particle* p = particles[particle_index];
+
   (*pool).current_field_index = 0;
   (*pool).particles_initialized = (*pool).current_particle_index;
   (*pool).current_particle_index += 1;
+
+  (*p).force_x = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*p).force_x);
+
+  (*p).force_y = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*p).force_y);
+
+  (*p).force_z = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*p).force_z);
 }
 
 void process_csv_field(void *field, size_t field_len __attribute__((unused)), void *p_pool)
@@ -96,7 +109,7 @@ void process_csv_field(void *field, size_t field_len __attribute__((unused)), vo
 }
 
 
-char* readfile(char *filename, size_t *len) 
+char* readfile(const char *filename, size_t *len) 
 {
     FILE *fh = fopen(filename, "r");
     if (fh == NULL) 
@@ -162,7 +175,7 @@ char* readfile(char *filename, size_t *len)
 }
 
 
-int load_particle_pool_from_csv(char* filename, ParticlePool* pool) 
+int load_particle_pool_from_csv(const char* filename, ParticlePool* pool) 
 {
     size_t len;
     char *csvdata = readfile(filename, &len);
@@ -172,6 +185,7 @@ int load_particle_pool_from_csv(char* filename, ParticlePool* pool)
     }
 
     struct csv_parser parser;
+    printf("Parsing Particle Pool %s", filename);
     int rc = csv_init(&parser, CSV_APPEND_NULL);
     csv_set_delim(&parser, ';');
 
@@ -188,6 +202,40 @@ int load_particle_pool_from_csv(char* filename, ParticlePool* pool)
     csv_free(&parser);
     free(csvdata);
 
+    printf("\nParsing Particle Pool %s done\n", filename);
     return 0;
 }
 
+void print_particle_values(int precision, const Particle* p)
+{
+    gmp_printf("X  %.*Fe ", precision, *((*p).position_x));
+    gmp_printf("Y  %.*Fe ", precision, *((*p).position_y));
+    gmp_printf("Z  %.*Fe\n", precision, *((*p).position_z));
+
+    gmp_printf("Vx %.*Fe ", precision, *((*p).velocity_x));
+    gmp_printf("Vy %.*Fe ", precision, *((*p).velocity_y));
+    gmp_printf("Vz %.*Fe\n", precision, *((*p).velocity_z));
+
+    gmp_printf("Fx %.*Fe ", precision, *((*p).force_x));
+    gmp_printf("Fy %.*Fe ", precision, *((*p).force_y));
+    gmp_printf("Fz %.*Fe\n", precision, *((*p).force_z));
+
+    gmp_printf("M  %.*Fe ", precision, *((*p).mass));
+    gmp_printf("C  %.*Fe\n", precision, *((*p).charge));
+}
+
+void print_particle_pool_values(int precision, const ParticlePool* pool)
+{
+  printf("Dumping Particle Pool:\n");
+
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    printf("\nParticle %d:\n", particle_index);
+
+    Particle* p = (*pool).particles[particle_index];
+
+    print_particle_values(precision, p);
+  }
+
+  printf("\nDumping Particle Pool done\n");
+}
