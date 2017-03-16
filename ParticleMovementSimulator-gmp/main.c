@@ -67,6 +67,10 @@ int main(int argc, char *argv[])
     mpf_add(current_time, current_time, config.StepSize);
   } while( mpf_cmp(current_time, config.EndTime) <= 0);
 
+  printf("--------------------------------------------------------------------------------\n");
+  printf("All Steps DONE: %lu\n", step_number);
+  print_particle_pool_values(config.OutputPrecision, &pool);
+
 
   return 0;
 }
