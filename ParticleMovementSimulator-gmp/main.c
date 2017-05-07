@@ -46,26 +46,28 @@ int main(int argc, char *argv[])
 
   printf("Starting Simulation..\n");
 
-  unsigned long step_number = 0;
 
   mpf_t current_time;
   mpf_init_set(current_time, config.StartTime);
 
-  do
-  {
-    step_number += 1;
-    if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
-    {
-      printf("--------------------------------------------------------------------------------\n");
-      printf("Steps calculated: %lu\n", step_number);
-      print_particle_pool_values(config.OutputPrecision, &pool);
-    }
+  unsigned long step_number = 0;
 
+  while( mpf_cmp(current_time, config.EndTime) < 0)
+  {
     calculate_forces_on_each_particle(&pool); 
     move_particles_to_next_position(&pool, config.StepSize);
 
     mpf_add(current_time, current_time, config.StepSize);
-  } while( mpf_cmp(current_time, config.EndTime) <= 0);
+
+    step_number += 1;
+
+    if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
+    {
+      printf("--------------------------------------------------------------------------------\n");
+      printf("Status after %lu steps\n", step_number);
+      print_particle_pool_values(config.OutputPrecision, &pool);
+    }
+  }
 
   printf("--------------------------------------------------------------------------------\n");
   printf("All Steps DONE: %lu\n", step_number);

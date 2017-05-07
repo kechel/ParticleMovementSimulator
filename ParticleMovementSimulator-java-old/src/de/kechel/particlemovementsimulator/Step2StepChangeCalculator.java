@@ -51,24 +51,25 @@ public class Step2StepChangeCalculator
 		
                 public Velocity calculateNextVelocity(Particle particle, Force resultingForce)
 		{
-                    
-                    double dNextVx = Vx.evaluate(resultingForce.getFx(), 
-                                            resultingForce.getFy(), 
-                                            resultingForce.getFz(),
+                    // d + a/m * t
+                    // => vx + Fx * StepSize / Mass
+                    double dNextVx = Vx.evaluate(resultingForce.getFx(), //a
+                                            resultingForce.getFy(), //b
+                                            resultingForce.getFz(),//c
                                             
-                                            particle.getVelocity().getVelocityVector().getXValue(),
-                                            particle.getVelocity().getVelocityVector().getYValue(),
-                                            particle.getVelocity().getVelocityVector().getZValue(),
+                                            particle.getVelocity().getVelocityVector().getXValue(),//d
+                                            particle.getVelocity().getVelocityVector().getYValue(),//e
+                                            particle.getVelocity().getVelocityVector().getZValue(),//f
                                             
-                                            particle.getVelocity().getDirectionValue().getXValue(),
-                                            particle.getVelocity().getDirectionValue().getYValue(),
-                                            particle.getVelocity().getDirectionValue().getZValue(),
+                                            particle.getVelocity().getDirectionValue().getXValue(),//g
+                                            particle.getVelocity().getDirectionValue().getYValue(),//h
+                                            particle.getVelocity().getDirectionValue().getZValue(),//i
                                             
-                                            particle.getVelocity().getSpeedValue(),
+                                            particle.getVelocity().getSpeedValue(),//s
                                             
-                                            particle.getMass().getMassValue(),
+                                            particle.getMass().getMassValue(),//m
                                             
-                                            tsg.getStepSize());
+                                            tsg.getStepSize());//t
                     
                     double dNextVy = Vy.evaluate(resultingForce.getFx(), 
                                             resultingForce.getFy(), 
@@ -111,16 +112,18 @@ public class Step2StepChangeCalculator
                 
 		public Position calculateNextPosition(Particle particle, Velocity vNext)
 		{
+                    // x + ((a+h)/2)*t
+                    // => Next Px = Px + ((Vx+Vx_next)/2)*StepSize
                     double dNextPx = Px.evaluate(
-                            particle.getVelocity().getVelocityVector().getXValue(),
-                            particle.getVelocity().getSpeedValue(),
-                            particle.getVelocity().getDirectionValue().getXValue(),
-                            vNext.getVelocityVector().getXValue(),
-                            vNext.getSpeedValue(),
-                            vNext.getDirectionValue().getXValue(),
-                            particle.getMass().getMassValue(),
-                            particle.getPosition().getXValue(),
-                            tsg.getStepSize()
+                            particle.getVelocity().getVelocityVector().getXValue(), // a
+                            particle.getVelocity().getSpeedValue(),//d
+                            particle.getVelocity().getDirectionValue().getXValue(),//e
+                            vNext.getVelocityVector().getXValue(),//h
+                            vNext.getSpeedValue(),//k
+                            vNext.getDirectionValue().getXValue(),//l
+                            particle.getMass().getMassValue(),//m
+                            particle.getPosition().getXValue(),//x
+                            tsg.getStepSize()//t
                             );
                     
                     double dNextPy = Py.evaluate(
