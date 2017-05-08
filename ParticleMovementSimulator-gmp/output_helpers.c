@@ -102,8 +102,8 @@ void store_status_for_gnuplot(ParticlePoolHistory* pp_history, ParticlePool* poo
 
 const char* get_line_for_gnuplot(const Particle* p)
 {
-    char* buffer = malloc(4096);
     int precision = 5;
+    char* buffer = malloc((precision + 10)*9); // 1.00000e+00
 
     gmp_sprintf(buffer, "%.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe\n",
         precision, *((*p).position_x),
