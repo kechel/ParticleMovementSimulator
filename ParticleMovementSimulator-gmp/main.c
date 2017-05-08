@@ -21,6 +21,7 @@
 
 #include <gmp.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "load_particle_pool_from_csv.h"
 #include "output_helpers.h"
 #include "configuration_helpers.h"
@@ -79,6 +80,9 @@ int main(int argc, char *argv[])
   print_particle_pool_values(config.OutputPrecision, &pool);
   print_history(&pp_history, &pool);
   write_history_to_log(&pp_history, &pool, config);
+
+  chdir(config.SimulationDirectory);
+  execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);
 
   return 0;
 }
