@@ -22,7 +22,18 @@
 #define OUTPUT_HELPERS_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <gmp.h>
 #include "pms_datatypes.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include "configuration_helpers.h"
+
+void print_history(ParticlePoolHistory* pp_history, ParticlePool* pool);
+void store_status_for_gnuplot(ParticlePoolHistory* pp_history, ParticlePool* pool);
+void init_output_directory(pms_config config);
+const char* get_line_for_gnuplot(const Particle* p);
+void init_pp_history(ParticlePoolHistory* pp_history, ParticlePool* pool);
 
 #endif

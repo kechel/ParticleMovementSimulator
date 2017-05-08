@@ -23,6 +23,7 @@
 
 #include <libconfig.h>
 #include <gmp.h>
+#include <time.h>
 
 typedef struct pms_config
 {
@@ -35,6 +36,10 @@ typedef struct pms_config
   int SaveOnlyStartEndPoints;
   int SaveOnlyStepNumberMultiplesOf;
   int OutputPrecision;
+  const char* OutputDirectory;
+  time_t simulation_run_started;
+  char* simulation_run_started_str;
+  char* SimulationDirectory;
 } pms_config;
 
 pms_config load_configuration(int argc, char *argv[]);

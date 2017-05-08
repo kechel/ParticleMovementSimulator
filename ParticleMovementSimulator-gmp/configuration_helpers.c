@@ -22,6 +22,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 pms_config load_configuration(int argc, char *argv[])
 {
@@ -67,6 +68,16 @@ pms_config load_configuration(int argc, char *argv[])
   config_lookup_int(&cfg, "simulation.logging.SaveOnlyStepNumberMultiplesOf", &pc.SaveOnlyStepNumberMultiplesOf);
   config_lookup_int(&cfg, "simulation.logging.OutputPrecision", &pc.OutputPrecision);
 
+  config_lookup_string(&cfg, "simulation.logging.OutputDirectory", &pc.OutputDirectory);
+
+  pc.simulation_run_started = time(NULL);
+  pc.simulation_run_started_str = malloc(26);
+  struct tm* tm_info;
+  tm_info = localtime(&pc.simulation_run_started);
+  strftime(pc.simulation_run_started_str, 26, "%Y-%m-%d_%H:%M:%S", tm_info);
+  pc.SimulationDirectory = malloc(strlen(pc.OutputDirectory) + strlen(pc.simulation_run_started_str) + 2);
+  sprintf(pc.SimulationDirectory, "%s/%s", pc.OutputDirectory, pc.simulation_run_started_str);
+
   return pc;
 };
 
@@ -84,6 +95,9 @@ void print_config_values(int precision, pms_config config)
   printf("SaveOnlyStartEndPoints:         %d\n", config.SaveOnlyStartEndPoints);
   printf("SaveOnlyStepNumberMultiplesOf:  %d\n", config.SaveOnlyStepNumberMultiplesOf);
   printf("OutputPrecision:                %d\n", config.OutputPrecision);
+  printf("OutputDirectory:                %s\n", config.OutputDirectory);
+  printf("Simulation run started at:      %s\n", config.simulation_run_started_str);
+  printf("SimulationDirectory:            %s\n", config.SimulationDirectory);
 };
 
 

@@ -20,4 +20,79 @@
 
 #include "output_helpers.h"
 
+void print_history(ParticlePoolHistory* pp_history, ParticlePool* pool)
+{
+  printf("ParticlePoolHistory:\n");
 
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    ParticleHistory ph = *((*pp_history).particle_histories[particle_index]);
+    printf("%s", ph.line_for_gnuplot);
+  }
+}
+
+void store_status_for_gnuplot(ParticlePoolHistory* pp_history, ParticlePool* pool)
+{
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    Particle* p = (*pool).particles[particle_index];
+
+    ParticleHistory* previous = (*pp_history).last_particle_histories[particle_index];
+    ParticleHistory* next = malloc(sizeof(ParticleHistory));
+    (*next).line_for_gnuplot = get_line_for_gnuplot(p);
+    (*next).next = NULL;
+
+    (*previous).next = next;
+    (*pp_history).last_particle_histories[particle_index] = next;
+  }
+}
+
+const char* get_line_for_gnuplot(const Particle* p)
+{
+    char* buffer = malloc(4096);
+    int precision = 5;
+
+    gmp_sprintf(buffer, "%.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe %.*Fe\n",
+        precision, *((*p).position_x),
+        precision, *((*p).position_y),
+        precision, *((*p).position_z),
+        precision, *((*p).velocity_x),
+        precision, *((*p).velocity_y),
+        precision, *((*p).velocity_z),
+        precision, *((*p).force_x),
+        precision, *((*p).force_y),
+        precision, *((*p).force_z));
+    return buffer;
+}
+
+void init_pp_history(ParticlePoolHistory* pp_history, ParticlePool* pool)
+{
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    Particle* p = (*pool).particles[particle_index];
+
+    ParticleHistory* next = malloc(sizeof(ParticleHistory));
+    (*next).line_for_gnuplot = get_line_for_gnuplot(p);
+    (*next).next = NULL;
+
+    (*pp_history).particle_histories[particle_index] = next;
+    (*pp_history).last_particle_histories[particle_index] = next;
+  }
+}
+
+void init_output_directory(pms_config config)
+{
+    printf("Writing to SimulationDirectory: %s\n", config.SimulationDirectory);
+
+    struct stat st = {0};
+
+    if( stat( config.OutputDirectory, &st) == -1) 
+    {
+        mkdir(config.OutputDirectory, 0755);
+    }
+
+    if( stat( config.SimulationDirectory, &st) == -1) 
+    {
+        mkdir( config.SimulationDirectory, 0755);
+    }
+}

@@ -44,8 +44,12 @@ int main(int argc, char *argv[])
   print_particle_pool_values(config.OutputPrecision, &pool);
   printf("--------------------------------------------------------------------------------\n");
 
-  printf("Starting Simulation..\n");
+  init_output_directory(config);
 
+  ParticlePoolHistory pp_history;
+  init_pp_history(&pp_history, &pool);
+
+  printf("Starting Simulation..\n");
 
   mpf_t current_time;
   mpf_init_set(current_time, config.StartTime);
@@ -66,13 +70,14 @@ int main(int argc, char *argv[])
       printf("--------------------------------------------------------------------------------\n");
       printf("Status after %lu steps\n", step_number);
       print_particle_pool_values(config.OutputPrecision, &pool);
+      store_status_for_gnuplot(&pp_history, &pool);
     }
   }
 
   printf("--------------------------------------------------------------------------------\n");
   printf("All Steps DONE: %lu\n", step_number);
   print_particle_pool_values(config.OutputPrecision, &pool);
-
+  print_history(&pp_history, &pool);
 
   return 0;
 }

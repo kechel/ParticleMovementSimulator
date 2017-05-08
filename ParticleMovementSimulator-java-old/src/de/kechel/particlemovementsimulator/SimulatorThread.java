@@ -442,7 +442,7 @@ public class SimulatorThread extends Thread
                         pp.advanceAllParticlesToFutureState();
                     }
                     //------------- simulation finished, now run history analyzer and write output
-                    stel.SimulatorThreadEvent("Writing output data files and calculating summary", 0, SimulatorThread.StatusRunning);
+                   stel.SimulatorThreadEvent("Writing output data files and calculating summary", 0, SimulatorThread.StatusRunning);
                    Iterator<Particle> it = pp.getAllParticleIterator();
                    long i = 0;
                    String gnuplot = "splot ";

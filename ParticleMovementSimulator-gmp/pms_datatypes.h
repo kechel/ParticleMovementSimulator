@@ -53,4 +53,19 @@ typedef struct ParticlePool
   Particle* particles[MAX_PARTICLES];
 } ParticlePool;
 
+typedef struct ParticleHistory ParticleHistory;
+
+struct ParticleHistory
+{
+    const char* line_for_gnuplot;
+    ParticleHistory* next;
+};
+
+typedef struct ParticlePoolHistory
+{
+    ParticleHistory* particle_histories[MAX_PARTICLES];
+    ParticleHistory* last_particle_histories[MAX_PARTICLES];
+} ParticlePoolHistory;
+
+
 #endif
