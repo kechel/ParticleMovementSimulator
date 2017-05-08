@@ -19,6 +19,7 @@
 */
 
 #include "output_helpers.h"
+#include <string.h>
 
 void print_history(ParticlePoolHistory* pp_history, ParticlePool* pool)
 {
@@ -27,8 +28,60 @@ void print_history(ParticlePoolHistory* pp_history, ParticlePool* pool)
   for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
   {
     ParticleHistory ph = *((*pp_history).particle_histories[particle_index]);
+    printf("\n\nParticle %d History:\n", particle_index);
     printf("%s", ph.line_for_gnuplot);
+    while( ph.next != NULL)
+    {
+        ph = *ph.next;
+        printf("%s", ph.line_for_gnuplot);
+    }
   }
+}
+
+void write_history_to_log(ParticlePoolHistory* pp_history, ParticlePool* pool, pms_config config)
+{
+  char filename[1000];
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    sprintf( filename, "%s%d", config.SimulationDirectory, particle_index);
+    FILE *f = fopen(filename, "w");
+    if (f == NULL)
+    {
+        printf("Error opening file %s\n", filename);
+        continue;
+    }
+
+    ParticleHistory ph = *((*pp_history).particle_histories[particle_index]);
+    fprintf(f, "%s", ph.line_for_gnuplot);
+    while( ph.next != NULL)
+    {
+        ph = *ph.next;
+        fprintf(f, "%s", ph.line_for_gnuplot);
+    }
+
+    fclose(f);
+  }
+
+  // gnuplot.script:
+  //splot "0" with lines, "1" with lines, "2" with lines, "3" with lines
+  sprintf( filename, "%sgnuplot.script", config.SimulationDirectory);
+  FILE *f = fopen(filename, "w");
+  if (f == NULL)
+  {
+    printf("Error opening file %s\n", filename);
+    return;
+  }
+
+  fprintf(f, "splot ");
+  for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
+  {
+    fprintf(f, "\"%d\" with lines", particle_index);
+    if( particle_index < (*pool).particles_initialized)
+    {
+        fprintf(f, ", ");
+    }
+  }
+  fclose(f);
 }
 
 void store_status_for_gnuplot(ParticlePoolHistory* pp_history, ParticlePool* pool)

@@ -76,7 +76,7 @@ pms_config load_configuration(int argc, char *argv[])
   tm_info = localtime(&pc.simulation_run_started);
   strftime(pc.simulation_run_started_str, 26, "%Y-%m-%d_%H:%M:%S", tm_info);
   pc.SimulationDirectory = malloc(strlen(pc.OutputDirectory) + strlen(pc.simulation_run_started_str) + 2);
-  sprintf(pc.SimulationDirectory, "%s/%s", pc.OutputDirectory, pc.simulation_run_started_str);
+  sprintf(pc.SimulationDirectory, "%s/%s/", pc.OutputDirectory, pc.simulation_run_started_str);
 
   return pc;
 };

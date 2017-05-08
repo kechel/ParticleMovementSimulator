@@ -78,6 +78,7 @@ int main(int argc, char *argv[])
   printf("All Steps DONE: %lu\n", step_number);
   print_particle_pool_values(config.OutputPrecision, &pool);
   print_history(&pp_history, &pool);
+  write_history_to_log(&pp_history, &pool, config);
 
   return 0;
 }

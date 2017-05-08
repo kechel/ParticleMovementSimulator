@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include "configuration_helpers.h"
 
+void write_history_to_log(ParticlePoolHistory* pp_history, ParticlePool* pool, pms_config config);
 void print_history(ParticlePoolHistory* pp_history, ParticlePool* pool);
 void store_status_for_gnuplot(ParticlePoolHistory* pp_history, ParticlePool* pool);
 void init_output_directory(pms_config config);
