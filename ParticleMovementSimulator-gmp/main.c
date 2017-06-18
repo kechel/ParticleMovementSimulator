@@ -61,6 +61,15 @@ int main(int argc, char *argv[])
 
   unsigned long step_number = 0;
 
+  
+  mpf_t total_steps;
+  mpf_init(total_steps);
+  mpf_sub(total_steps, config.EndTime, config.StartTime);
+  mpf_div(total_steps, total_steps, config.StepSize);
+
+  mpf_t percentage_done;
+  mpf_init(percentage_done);
+
   while( mpf_cmp(current_time, config.EndTime) < 0)
   {
     calculate_forces_on_each_particle(&pool, cm); 
@@ -72,10 +81,10 @@ int main(int argc, char *argv[])
 
     if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
     {
+      mpf_ui_div( percentage_done, step_number, total_steps);
       printf("--------------------------------------------------------------------------------\n");
-      printf("Status after %lu steps\n", step_number);
+      gmp_printf("%lu/%.*Fe steps done (%.*Fe%)\n", step_number, 3, total_steps, 3, percentage_done);
       print_particle_pool_values(config.OutputPrecision, &pool);
-      printf("done %lu steps\n", step_number);
       store_status_for_gnuplot(&pp_history, &pool);
     }
   }
@@ -90,7 +99,7 @@ int main(int argc, char *argv[])
   free_calculation_memory(cm);
 
   chdir(config.SimulationDirectory);
-  //execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);
+  execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);
 
   return 0;
 }
