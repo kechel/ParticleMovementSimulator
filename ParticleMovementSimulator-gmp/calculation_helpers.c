@@ -19,6 +19,7 @@
 */
 
 #include "calculation_helpers.h"
+#include "load_particle_pool_from_csv.h"
 
 // calculates the force on p due to dynamic movement, distance and charge of other_p
 // TODO: missing gravity due to other_p
@@ -243,10 +244,22 @@ void move_particles_to_next_position(ParticlePool* pool, mpf_t StepSize, Calcula
     mpf_t* next_vy = (*cm).a2;
     mpf_t* next_vz = (*cm).a3;
     mpf_t* tmp1 = (*cm).tmp1;
+    //mpf_t* tmp2 = (*cm).tmp2;
+    //mpf_t* tmp3 = (*cm).tmp3;
 
     for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
     {
         Particle* p = (*pool).particles[particle_index];
+
+        // check for errors due to discretion
+        // mpf_cmp: Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, and a negative value if op1 < op2.
+        if( mpf_cmp_d(*((*p).force_x), 1e-18) > 0 || mpf_cmp_d(*((*p).force_x), -1e-18) < 0)
+        {
+          printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+          printf("Warning: very high forces");
+          print_particle_pool_values(5, pool);
+          printf("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n");
+        }
 
         // next Vx = Vx + Fx * StepSize / Mass
         mpf_mul(*tmp1, *((*p).force_x), StepSize);
