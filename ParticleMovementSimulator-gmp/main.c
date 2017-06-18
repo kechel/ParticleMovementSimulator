@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
   ParticlePoolHistory pp_history;
   init_pp_history(&pp_history, &pool);
 
+  CalculationMemory* cm = create_calculation_memory();
+
   printf("Starting Simulation..\n");
 
   mpf_t current_time;
@@ -59,8 +61,8 @@ int main(int argc, char *argv[])
 
   while( mpf_cmp(current_time, config.EndTime) < 0)
   {
-    calculate_forces_on_each_particle(&pool); 
-    move_particles_to_next_position(&pool, config.StepSize);
+    calculate_forces_on_each_particle(&pool, cm); 
+    move_particles_to_next_position(&pool, config.StepSize, cm);
 
     mpf_add(current_time, current_time, config.StepSize);
 
@@ -70,10 +72,12 @@ int main(int argc, char *argv[])
     {
       printf("--------------------------------------------------------------------------------\n");
       printf("Status after %lu steps\n", step_number);
-      print_particle_pool_values(config.OutputPrecision, &pool);
+      //print_particle_pool_values(config.OutputPrecision, &pool);
       store_status_for_gnuplot(&pp_history, &pool);
     }
   }
+
+  free_calculation_memory(cm);
 
   printf("--------------------------------------------------------------------------------\n");
   printf("All Steps DONE: %lu\n", step_number);

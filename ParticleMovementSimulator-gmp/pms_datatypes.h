@@ -25,6 +25,21 @@
 
 #define MAX_PARTICLES 100
 
+typedef struct CalculationMemory
+{
+  mpf_t* c; // speed of light 
+  mpf_t* c_square; // speed of light ^ 2
+  mpf_t* c_square_over_10_pow_7; // c_square_over_10_pow_7 = c^2 / 10^7
+
+  mpf_t* a1;
+  mpf_t* a2;
+  mpf_t* a3;
+  mpf_t* a4;
+  mpf_t* tmp1;
+  mpf_t* tmp2;
+  mpf_t* tmp3;
+} CalculationMemory;
+
 typedef struct Particle
 {
   mpf_t* position_x;

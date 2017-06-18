@@ -22,8 +22,19 @@
 
 // calculates the force on p due to dynamic movement, distance and charge of other_p
 // TODO: missing gravity due to other_p
-void calculate_and_add_force(Particle* p, Particle* other_p, mpf_t* c_square, mpf_t* c_square_over_10_pow_7, mpf_t* a1, mpf_t* a2, mpf_t* a3, mpf_t* a4, mpf_t* tmp1, mpf_t* tmp2, mpf_t* tmp3)
+void calculate_and_add_force(Particle* p, Particle* other_p, CalculationMemory *cm)
 {
+
+  mpf_t* c_square = (*cm).c_square;
+  mpf_t* c_square_over_10_pow_7 = (*cm).c_square_over_10_pow_7;
+  mpf_t* tmp1 = (*cm).tmp1;
+  mpf_t* tmp2 = (*cm).tmp2;
+  mpf_t* tmp3 = (*cm).tmp3;
+  mpf_t* a1 = (*cm).a1;
+  mpf_t* a2 = (*cm).a2;
+  mpf_t* a3 = (*cm).a3;
+  mpf_t* a4 = (*cm).a4;
+
   // *****************************************************
   // c_square = c^2 
   // -> c_square ist given pre-calculated with correct value
@@ -145,55 +156,58 @@ void calculate_and_add_force(Particle* p, Particle* other_p, mpf_t* c_square, mp
 
 }
 
-void calculate_forces_on_each_particle(ParticlePool *pool) 
+CalculationMemory* create_calculation_memory()
 {
+  CalculationMemory* cm = (CalculationMemory*)malloc(sizeof(CalculationMemory));
 
-  // pre-initialize several mpf_t variables for inner calculation-loops
+  (*cm).c = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).c);
+  mpf_set_str(*(*cm).c, SPEED_OF_LIGHT, 10);
 
-  mpf_t* c; // speed of light 
-  c = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*c);
-  mpf_set_str(*c, SPEED_OF_LIGHT, 10);
-
-  mpf_t* c_square; // speed of light ^ 2
-  c_square = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*c_square);
-  mpf_mul(*c_square, *c, *c);
+  (*cm).c_square = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).c_square);
+  mpf_mul(*(*cm).c_square, *(*cm).c, *(*cm).c);
  
-  mpf_t* c_square_over_10_pow_7; // c_square_over_10_pow_7 = c^2 / 10^7
-  c_square_over_10_pow_7 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*c_square_over_10_pow_7);
-  mpf_mul(*c_square_over_10_pow_7, *c, *c);
-  mpf_div_ui(*c_square_over_10_pow_7, *c_square_over_10_pow_7, 10^7);
+  (*cm).c_square_over_10_pow_7 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).c_square_over_10_pow_7);
+  mpf_mul(*(*cm).c_square_over_10_pow_7, *(*cm).c, *(*cm).c);
+  mpf_div_ui(*(*cm).c_square_over_10_pow_7, *(*cm).c_square_over_10_pow_7, 10^7);
 
   // a1, a2, a3, a4, tmp1, tmp2, tmp3 freely available for use within loops
-  mpf_t* a1;
-  a1 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*a1);
+  (*cm).a1 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).a1);
 
-  mpf_t* a2;
-  a2 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*a2);
+  (*cm).a2 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).a2);
 
-  mpf_t* a3;
-  a3 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*a3);
+  (*cm).a3 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).a3);
 
-  mpf_t* a4;
-  a4 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*a4);
+  (*cm).a4 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).a4);
 
-  mpf_t* tmp1;
-  tmp1 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*tmp1);
+  (*cm).tmp1 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).tmp1);
 
-  mpf_t* tmp2;
-  tmp2 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*tmp2);
+  (*cm).tmp2 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).tmp2);
 
-  mpf_t* tmp3;
-  tmp3 = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*tmp3);
+  (*cm).tmp3 = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).tmp3);
+
+  return cm;
+}
+
+void free_calculation_memory(CalculationMemory* cm)
+{
+  printf("f1\n");
+  mpf_clear(*((*cm).c));
+  printf("f2\n");
+  free(cm);
+}
+
+void calculate_forces_on_each_particle(ParticlePool* pool, CalculationMemory* cm) 
+{
 
   for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
   {
@@ -209,28 +223,17 @@ void calculate_forces_on_each_particle(ParticlePool *pool)
         continue;
       }
       Particle* other_p = (*pool).particles[other_particle_index];
-      calculate_and_add_force(p, other_p, c_square, c_square_over_10_pow_7, a1, a2, a3, a4, tmp1, tmp2, tmp3);
+      calculate_and_add_force(p, other_p, cm);
     }
   }
 }
 
-void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize)
+void move_particles_to_next_position(ParticlePool* pool, mpf_t StepSize, CalculationMemory* cm)
 {
-    mpf_t* next_vx;
-    next_vx = (mpf_t*)malloc(sizeof(mpf_t));
-    mpf_init(*next_vx);
-
-    mpf_t* next_vy;
-    next_vy = (mpf_t*)malloc(sizeof(mpf_t));
-    mpf_init(*next_vy);
-
-    mpf_t* next_vz;
-    next_vz = (mpf_t*)malloc(sizeof(mpf_t));
-    mpf_init(*next_vz);
-
-    mpf_t* tmp1;
-    tmp1 = (mpf_t*)malloc(sizeof(mpf_t));
-    mpf_init(*tmp1);
+    mpf_t* next_vx = (*cm).a1;
+    mpf_t* next_vy = (*cm).a2;
+    mpf_t* next_vz = (*cm).a3;
+    mpf_t* tmp1 = (*cm).tmp1;
 
     for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
     {

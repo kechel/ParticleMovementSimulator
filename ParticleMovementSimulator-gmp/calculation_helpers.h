@@ -28,7 +28,9 @@
 
 #define SPEED_OF_LIGHT "299792458"
 
-void calculate_forces_on_each_particle(ParticlePool *pool);
-void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize);
+void calculate_forces_on_each_particle(ParticlePool *pool, CalculationMemory* cm);
+void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize, CalculationMemory* cm);
+CalculationMemory* create_calculation_memory();
+void free_calculation_memory(CalculationMemory* cm);
 
 #endif
