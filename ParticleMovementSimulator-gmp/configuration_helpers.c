@@ -49,19 +49,19 @@ pms_config load_configuration(int argc, char *argv[])
 
   config_lookup_string(&cfg, "simulation.ParticlePoolFilename", &pc.ParticlePoolFilename);
 
-  double tmp_double;
+  const char* tmp_buffer;
 
   mpf_init(pc.StartTime);
-  config_lookup_float(&cfg, "simulation.StartTime", &tmp_double);
-  mpf_set_d( pc.StartTime, tmp_double);
+  config_lookup_string(&cfg, "simulation.StartTime", &tmp_buffer);
+  mpf_set_str( pc.StartTime, tmp_buffer, 10);
 
   mpf_init(pc.EndTime);
-  config_lookup_float(&cfg, "simulation.EndTime", &tmp_double);
-  mpf_set_d( pc.EndTime, tmp_double);
+  config_lookup_string(&cfg, "simulation.EndTime", &tmp_buffer);
+  mpf_set_str( pc.EndTime, tmp_buffer, 10);
 
   mpf_init(pc.StepSize);
-  config_lookup_float(&cfg, "simulation.StepSize", &tmp_double);
-  mpf_set_d( pc.StepSize, tmp_double);
+  config_lookup_string(&cfg, "simulation.StepSize", &tmp_buffer);
+  mpf_set_str( pc.StepSize, tmp_buffer, 10);
 
   config_lookup_int(&cfg, "simulation.mpf_set_default_prec", &pc.mpf_set_default_prec);
   config_lookup_int(&cfg, "simulation.logging.SaveOnlyStartEndPoints", &pc.SaveOnlyStartEndPoints);

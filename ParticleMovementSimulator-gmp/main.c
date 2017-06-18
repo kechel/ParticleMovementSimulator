@@ -72,9 +72,9 @@ int main(int argc, char *argv[])
 
     if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
     {
-      //printf("--------------------------------------------------------------------------------\n");
-      //printf("Status after %lu steps\n", step_number);
-      //print_particle_pool_values(config.OutputPrecision, &pool);
+      printf("--------------------------------------------------------------------------------\n");
+      printf("Status after %lu steps\n", step_number);
+      print_particle_pool_values(config.OutputPrecision, &pool);
       printf("done %lu steps\n", step_number);
       store_status_for_gnuplot(&pp_history, &pool);
     }

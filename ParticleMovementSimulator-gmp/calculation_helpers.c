@@ -168,6 +168,10 @@ CalculationMemory* create_calculation_memory()
   mpf_init(*(*cm).qe);
   mpf_set_str(*(*cm).qe, CHARGE_OF_ELECTRON, 10);
 
+  (*cm).qp = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).qp);
+  mpf_set_str(*(*cm).qp, CHARGE_OF_POSITRON, 10);
+
   (*cm).me = (mpf_t*)malloc(sizeof(mpf_t));
   mpf_init(*(*cm).me);
   mpf_set_str(*(*cm).me, MASS_OF_ELECTRON, 10);

@@ -73,7 +73,7 @@ void process_csv_field(void *field, size_t field_len __attribute__((unused)), vo
 
 
   int ist_sonderfall = 0;
-  if( strcmp((char*)field, "c") == 0 || strcmp((char*)field, "qe") == 0 || strcmp((char*)field, "me") == 0)
+  if( strcmp((char*)field, "c") == 0 || strcmp((char*)field, "qe") == 0 || strcmp((char*)field, "qp") == 0 || strcmp((char*)field, "me") == 0)
   {
     ist_sonderfall = 1;
   }
@@ -98,6 +98,10 @@ void process_csv_field(void *field, size_t field_len __attribute__((unused)), vo
       {
         value = (*(*pool).cm).qe;
       }
+      if( strcmp((char*)field, "qp") == 0)
+      {
+        value = (*(*pool).cm).qp;
+      }
       if( strcmp((char*)field, "me") == 0)
       {
         value = (*(*pool).cm).me;
@@ -115,6 +119,10 @@ void process_csv_field(void *field, size_t field_len __attribute__((unused)), vo
       if( strcmp((char*)field, "qe") == 0)
       {
         mpf_set(*value, *(*(*pool).cm).qe);
+      }
+      if( strcmp((char*)field, "qp") == 0)
+      {
+        mpf_set(*value, *(*(*pool).cm).qp);
       }
       if( strcmp((char*)field, "me") == 0)
       {

@@ -18,7 +18,7 @@
 #    along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
 #
 
-CC = gcc
+CC = gcc -g3
 CC_FLAGS = -Wall -std=c11
 CC_LIBS = -lgmp -lm -lcsv -lconfig
  
