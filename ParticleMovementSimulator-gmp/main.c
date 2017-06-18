@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   free_calculation_memory(cm);
 
   chdir(config.SimulationDirectory);
-  execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);
+  //execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);
 
   return 0;
 }

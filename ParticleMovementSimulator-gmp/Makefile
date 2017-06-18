@@ -28,7 +28,7 @@ OBJECTS = $(SOURCES:.c=.o)
  
 compile: $(OBJECTS)
 	$(CC) $(CC_LIBS) $(CC_FLAGS) $(OBJECTS) -o $(EXEC)
- 
+
 %.o: %.c
 	$(CC) $(CC_LIBS) $(CC_FLAGS) -c $< -o $@
  
