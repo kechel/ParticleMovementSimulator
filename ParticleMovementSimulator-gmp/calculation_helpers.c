@@ -164,6 +164,14 @@ CalculationMemory* create_calculation_memory()
   mpf_init(*(*cm).c);
   mpf_set_str(*(*cm).c, SPEED_OF_LIGHT, 10);
 
+  (*cm).qe = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).qe);
+  mpf_set_str(*(*cm).qe, CHARGE_OF_ELECTRON, 10);
+
+  (*cm).me = (mpf_t*)malloc(sizeof(mpf_t));
+  mpf_init(*(*cm).me);
+  mpf_set_str(*(*cm).me, MASS_OF_ELECTRON, 10);
+
   (*cm).c_square = (mpf_t*)malloc(sizeof(mpf_t));
   mpf_init(*(*cm).c_square);
   mpf_mul(*(*cm).c_square, *(*cm).c, *(*cm).c);
@@ -200,15 +208,12 @@ CalculationMemory* create_calculation_memory()
 
 void free_calculation_memory(CalculationMemory* cm)
 {
-  printf("f1\n");
   mpf_clear(*((*cm).c));
-  printf("f2\n");
   free(cm);
 }
 
 void calculate_forces_on_each_particle(ParticlePool* pool, CalculationMemory* cm) 
 {
-
   for( int particle_index = 0; particle_index <= (*pool).particles_initialized; particle_index++)
   {
     Particle* p = (*pool).particles[particle_index];

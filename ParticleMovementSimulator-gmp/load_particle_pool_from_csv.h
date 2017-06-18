@@ -15,7 +15,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
+    along with PMS with GMP.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
 #ifndef LOAD_PARTICLE_POOL_FROM_CSV_H
@@ -27,7 +27,7 @@
 #include <csv.h>
 #include "pms_datatypes.h"
 
-int load_particle_pool_from_csv(const char* filename, ParticlePool* pool);
+int load_particle_pool_from_csv(const char* filename, ParticlePool* pool, CalculationMemory* cm);
 void print_particle_values(int precision, const Particle* p);
 void print_particle_pool_values(int precision, const ParticlePool* pool);
 

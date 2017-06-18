@@ -17,7 +17,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
+    along with PMS with GMP.  If not, see <http://www.gnu.org/licenses/>. 
 */
 
 
@@ -71,10 +71,57 @@ void process_csv_field(void *field, size_t field_len __attribute__((unused)), vo
 
   Particle* p = particles[particle_index];
 
+
+  int ist_sonderfall = 0;
+  if( strcmp((char*)field, "c") == 0 || strcmp((char*)field, "qe") == 0 || strcmp((char*)field, "me") == 0)
+  {
+    ist_sonderfall = 1;
+  }
+
   mpf_t* value;
-  value = (mpf_t*)malloc(sizeof(mpf_t));
-  mpf_init(*value);
-  mpf_set_str( *value, (char*)field, 10);
+
+  if( ist_sonderfall == 0) // individuelle werte muessen immer getrennt gespeichert werden
+  {
+    value = (mpf_t*)malloc(sizeof(mpf_t));
+    mpf_init(*value);
+    mpf_set_str( *value, (char*)field, 10);
+  }
+  else
+  {
+    if( field_index >= 6) // wenn masse oder ladung =>  bleibt konstant waehrend simulation, braucht also keine kopie
+    {
+      if( strcmp((char*)field, "c") == 0)
+      {
+        value = (*(*pool).cm).c;
+      }
+      if( strcmp((char*)field, "qe") == 0)
+      {
+        value = (*(*pool).cm).qe;
+      }
+      if( strcmp((char*)field, "me") == 0)
+      {
+        value = (*(*pool).cm).me;
+      }
+    }
+    else // position oder geschwindigkeit -> bleibt nicht konstant, muss also je particle als kopie initialisiert werden
+    {
+      value = (mpf_t*)malloc(sizeof(mpf_t));
+      mpf_init(*value);
+
+      if( strcmp((char*)field, "c") == 0)
+      {
+        mpf_set(*value, *(*(*pool).cm).c);
+      }
+      if( strcmp((char*)field, "qe") == 0)
+      {
+        mpf_set(*value, *(*(*pool).cm).qe);
+      }
+      if( strcmp((char*)field, "me") == 0)
+      {
+        mpf_set(*value, *(*(*pool).cm).me);
+      }
+    }
+  }
 
   switch(field_index)
   {
@@ -175,7 +222,7 @@ char* readfile(const char *filename, size_t *len)
 }
 
 
-int load_particle_pool_from_csv(const char* filename, ParticlePool* pool) 
+int load_particle_pool_from_csv(const char* filename, ParticlePool* pool, CalculationMemory* cm) 
 {
     size_t len;
     char *csvdata = readfile(filename, &len);

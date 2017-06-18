@@ -27,6 +27,8 @@
 #include "pms_datatypes.h"
 
 #define SPEED_OF_LIGHT "299792458"
+#define CHARGE_OF_ELECTRON "-1.6021766208E-19"
+#define MASS_OF_ELECTRON "9.10938356E-31"
 
 void calculate_forces_on_each_particle(ParticlePool *pool, CalculationMemory* cm);
 void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize, CalculationMemory* cm);

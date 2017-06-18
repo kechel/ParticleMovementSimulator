@@ -29,6 +29,8 @@
 
 int main(int argc, char *argv[])
 {
+
+
   pms_config config = load_configuration(argc, argv);
   printf("--------------------------------------------------------------------------------\n");
   print_config_values(config.OutputPrecision, config);
@@ -37,10 +39,12 @@ int main(int argc, char *argv[])
   mpf_set_default_prec(config.mpf_set_default_prec); 
 
   ParticlePool pool;
+  CalculationMemory* cm = create_calculation_memory();
+  pool.cm = cm;
   pool.current_particle_index = 0;
   pool.current_field_index = 0;
 
-  load_particle_pool_from_csv(config.ParticlePoolFilename, &pool);
+  load_particle_pool_from_csv(config.ParticlePoolFilename, &pool, cm);
   printf("--------------------------------------------------------------------------------\n");
   print_particle_pool_values(config.OutputPrecision, &pool);
   printf("--------------------------------------------------------------------------------\n");
@@ -49,8 +53,6 @@ int main(int argc, char *argv[])
 
   ParticlePoolHistory pp_history;
   init_pp_history(&pp_history, &pool);
-
-  CalculationMemory* cm = create_calculation_memory();
 
   printf("Starting Simulation..\n");
 
@@ -70,20 +72,22 @@ int main(int argc, char *argv[])
 
     if( step_number % config.SaveOnlyStepNumberMultiplesOf == 0)
     {
-      printf("--------------------------------------------------------------------------------\n");
-      printf("Status after %lu steps\n", step_number);
+      //printf("--------------------------------------------------------------------------------\n");
+      //printf("Status after %lu steps\n", step_number);
       //print_particle_pool_values(config.OutputPrecision, &pool);
+      printf("done %lu steps\n", step_number);
       store_status_for_gnuplot(&pp_history, &pool);
     }
   }
 
-  free_calculation_memory(cm);
 
   printf("--------------------------------------------------------------------------------\n");
   printf("All Steps DONE: %lu\n", step_number);
   print_particle_pool_values(config.OutputPrecision, &pool);
-  print_history(&pp_history, &pool);
+  //print_history(&pp_history, &pool);
   write_history_to_log(&pp_history, &pool, config);
+
+  free_calculation_memory(cm);
 
   chdir(config.SimulationDirectory);
   execl("/usr/bin/gnuplot", "gnuplot", "gnuplot.script", "-", (char*) NULL);

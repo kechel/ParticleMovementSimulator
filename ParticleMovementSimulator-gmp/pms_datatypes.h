@@ -28,6 +28,8 @@
 typedef struct CalculationMemory
 {
   mpf_t* c; // speed of light 
+  mpf_t* qe; // electric charge of electron
+  mpf_t* me; // mass of electron
   mpf_t* c_square; // speed of light ^ 2
   mpf_t* c_square_over_10_pow_7; // c_square_over_10_pow_7 = c^2 / 10^7
 
@@ -66,6 +68,7 @@ typedef struct ParticlePool
   unsigned int current_field_index;
   unsigned int particles_initialized;
   Particle* particles[MAX_PARTICLES];
+  CalculationMemory* cm;
 } ParticlePool;
 
 typedef struct ParticleHistory ParticleHistory;
