@@ -31,6 +31,7 @@ typedef struct CalculationMemory
   mpf_t* qe; // electric charge of electron
   mpf_t* qp; // electric charge of positron
   mpf_t* me; // mass of electron
+  mpf_t* mp; // mass of proton
   mpf_t* c_square; // speed of light ^ 2
   mpf_t* c_square_over_10_pow_7; // c_square_over_10_pow_7 = c^2 / 10^7
 

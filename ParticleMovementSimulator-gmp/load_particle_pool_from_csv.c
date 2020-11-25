@@ -279,6 +279,25 @@ void print_particle_values(int precision, const Particle* p)
     gmp_printf("C  %.*Fe\n", precision, *((*p).charge));
 }
 
+void print_particle_values_inline(int precision, const Particle* p)
+{
+//    gmp_printf("X  %.*Fe ", precision, *((*p).position_x));
+//    gmp_printf("Y  %.*Fe ", precision, *((*p).position_y));
+//    gmp_printf("Z  %.*Fe ", precision, *((*p).position_z));
+
+    gmp_printf("Vx %.*Fe ", precision, *((*p).velocity_x));
+    gmp_printf("Vy %.*Fe ", precision, *((*p).velocity_y));
+    gmp_printf("Vz %.*Fe ", precision, *((*p).velocity_z));
+
+    gmp_printf("Fx %.*Fe ", precision, *((*p).force_x));
+    gmp_printf("Fy %.*Fe ", precision, *((*p).force_y));
+    gmp_printf("Fz %.*Fe ", precision, *((*p).force_z));
+
+//    gmp_printf("M  %.*Fe ", precision, *((*p).mass));
+//    gmp_printf("C  %.*Fe ", precision, *((*p).charge));
+}
+
+
 void print_particle_pool_values(int precision, const ParticlePool* pool)
 {
   printf("Dumping Particle Pool:\n");

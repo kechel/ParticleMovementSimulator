@@ -29,6 +29,7 @@
 
 int load_particle_pool_from_csv(const char* filename, ParticlePool* pool, CalculationMemory* cm);
 void print_particle_values(int precision, const Particle* p);
+void print_particle_values_inline(int precision, const Particle* p);
 void print_particle_pool_values(int precision, const ParticlePool* pool);
 
 #endif

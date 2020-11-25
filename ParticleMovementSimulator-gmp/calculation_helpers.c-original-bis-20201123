@@ -43,7 +43,6 @@ void normalisiere_geschwindigkeitsvektor(Particle* p, CalculationMemory *cm)
 }
 
 // calculates the force on p due to relative movement, distance and charge of other_p
-// Formulas based on Dyn_Force_Math_V4_20170203.pdf (14)..(17)
 // DONE (was TODO: missing gravity due to other_p -> or not missing at all? ;)
 void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *cm)
 {
@@ -86,7 +85,7 @@ void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *
   mpf_div(*a1, *a1, *c_square);
 
   // *****************************************************
-  // a2 = v * r / c^2 = (v1x-v0x)*(r1x-r0x) + (v1y-v0y)*(r1y-r0y) + (v1z-v0z)*(r1z-r0z)
+  // a2 = v x r / c^2 = (v1x-v0z)*(r1x-r0z) + (v1y-v0y)*(r1y-r0y) + (v1z-v0z)*(r1z-r0z)
   mpf_sub(*tmp1, *((*p).velocity_x), *((*other_p).velocity_x));
   mpf_sub(*tmp2, *((*p).position_x), *((*other_p).position_x));
   mpf_mul(*a2, *tmp1, *tmp2);
@@ -128,7 +127,7 @@ void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *
   mpf_div(*a4, *a4, *a3);
 
   // *****************************************************
-  // Fx = a4 * ((r1x-r0x) + (r1x-r0x)*a1 - (v1x-v0x)*a2)
+  // Fx = a4 * ((r1x-r0x) + (r1xr0x)*a1 - (v1x-v0x)*a2)
   // tmp1 = r1x-r0x
   mpf_sub(*tmp1, *((*p).position_x), *((*other_p).position_x)); // hatten wir schonmal!
 
@@ -146,7 +145,7 @@ void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *
 
 
   // *****************************************************
-  // Fy = a4 * ((r1y-r0y) + (r1y-r0y)*a1 - (v1y-v0y)*a2)
+  // Fy = a4 * ((r1y-r0y) + (r1yr0y)*a1 - (v1y-v0y)*a2)
   // tmp1 = r1y-r0y
   mpf_sub(*tmp1, *((*p).position_y), *((*other_p).position_y)); // hatten wir schonmal!
 
@@ -164,7 +163,7 @@ void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *
 
 
   // *****************************************************
-  // Fz = a4 * ((r1z-r0z) + (r1z-r0z)*a1 - (v1z-v0z)*a2)
+  // Fz = a4 * ((r1z-r0z) + (r1zr0z)*a1 - (v1z-v0z)*a2)
   // tmp1 = r1z-r0z
   mpf_sub(*tmp1, *((*p).position_z), *((*other_p).position_z)); // hatten wir schonmal!
 

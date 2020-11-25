@@ -30,10 +30,13 @@
 #define CHARGE_OF_ELECTRON "-1.6021766208E-19"
 #define CHARGE_OF_POSITRON "1.6021766208E-19"
 #define MASS_OF_ELECTRON "9.10938356E-31"
+#define MASS_OF_PROTON "1.6726219E-27"
 
 void calculate_forces_on_each_particle(ParticlePool *pool, CalculationMemory* cm);
 void move_particles_to_next_position(ParticlePool *pool, mpf_t StepSize, CalculationMemory* cm);
 CalculationMemory* create_calculation_memory();
 void free_calculation_memory(CalculationMemory* cm);
+void calculate_and_set_force(Particle* p, Particle* other_p, CalculationMemory *cm);
+void normalisiere_geschwindigkeitsvektor(Particle* p, CalculationMemory *cm);
 
 #endif
